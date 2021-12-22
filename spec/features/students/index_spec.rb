@@ -29,10 +29,22 @@ RSpec.describe 'students index', type: :feature do
         expect(page).to have_content(student_3.house) 
       end
     end
+  end
 
-    it 'shows average student age rounded to one decimal' do
-      expect(page).to have_content("Average Age: 2.3")
-      expect(page).to have_no_content("Average Age: 2.33333")
-    end
+  it 'shows average student age rounded to one decimal' do
+    expect(page).to have_content("Average Age: 2.3")
+    expect(page).to have_no_content("Average Age: 2.33333")
+  end
+
+  it 'orders students alphabetically' do
+    student_4 = Student.create!(name: "a_name_4", age: 6, house: "house_3")
+    visit students_path
+
+    expect(student_4.name).to appear_before(student_1.name)
+    expect(student_4.name).to appear_before(student_2.name)
+    expect(student_4.name).to appear_before(student_3.name)
+    expect(student_1.name).to appear_before(student_2.name)
+    expect(student_1.name).to appear_before(student_3.name)
+    expect(student_2.name).to appear_before(student_3.name)
   end
 end
