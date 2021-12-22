@@ -3,6 +3,6 @@
 <h2>Course List</h2>
 <ul>
   <% @courses.each do |c| %>
-    <li id="course-<%= c.id %>"><%= c.name %></li>
+    <li id="course-<%= c.id %>"><%= c.name %>: <%= c.student_count %></li>
   <% end %>
 </ul>
