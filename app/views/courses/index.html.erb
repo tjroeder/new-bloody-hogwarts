@@ -2,7 +2,12 @@
 
 <h2>Course List</h2>
 <ul>
-  <% @courses.each do |c| %>
-    <li id="course-<%= c.id %>"><%= c.name %>: <%= c.student_count %></li>
+  <% @courses.order_alphabetical.each do |c| %>
+    <li><%= c.name %>: <%= c.student_count %></li>
+      <ul id="course-<%= c.id %>">
+        <% c.students.order_alphabetical.each do |s| %>
+          <li><%= s.name %></li>
+        <% end%>
+      </ul>
   <% end %>
 </ul>
