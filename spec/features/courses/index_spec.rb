@@ -17,5 +17,13 @@ RSpec.describe 'course index', type: :feature do
       expect(page).to have_content(course_2.name)
       expect(page).to have_content(course_3.name)
     end
+
+    it 'shows count of students in each course' do
+      visit courses_path
+
+      expect(page).to have_content("#{course_1.name}: #{course_1.student_count}")
+      expect(page).to have_content("#{course_2.name}: #{course_2.student_count}")
+      expect(page).to have_content("#{course_3.name}: #{course_3.student_count}")
+    end
   end
 end
