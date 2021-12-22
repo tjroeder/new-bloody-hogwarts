@@ -1,0 +1,8 @@
+<h1>Courses Index</h1>
+
+<h2>Course List</h2>
+<ul>
+  <% @courses.each do |c| %>
+    <li id="course-<%= c.id %>"><%= c.name %></li>
+  <% end %>
+</ul>
