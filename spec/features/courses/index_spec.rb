@@ -25,5 +25,31 @@ RSpec.describe 'course index', type: :feature do
       expect(page).to have_content("#{course_2.name}: #{course_2.student_count}")
       expect(page).to have_content("#{course_3.name}: #{course_3.student_count}")
     end
+
+    it 'orders courses in alphabetical order' do
+      student_4 = Student.create!(name: "a_student_4", age: 6, house: "house_3")
+      course_4 = Course.create!(name: "a_course_4", students: [student_2, student_4, student_3])
+      visit courses_path
+
+      expect(course_4.name).to appear_before(course_1.name)
+      expect(course_4.name).to appear_before(course_2.name)
+      expect(course_4.name).to appear_before(course_3.name)
+      expect(course_1.name).to appear_before(course_2.name)
+      expect(course_1.name).to appear_before(course_3.name)
+      expect(course_2.name).to appear_before(course_3.name)
+    end
+
+    it 'orders students in courses in alphabetical order' do
+      student_4 = Student.create!(name: "a_student_4", age: 6, house: "house_3")
+      course_4 = Course.create!(name: "a_course_4", students: [student_2, student_4, student_3])
+      visit courses_path
+      save_and_open_page
+
+      within("#course-#{course_4.id}") do
+        expect(student_4.name).to appear_before(student_2.name)
+        expect(student_4.name).to appear_before(student_3.name)
+        expect(student_2.name).to appear_before(student_3.name)
+      end
+    end
   end
 end
