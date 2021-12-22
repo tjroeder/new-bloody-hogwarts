@@ -4,3 +4,5 @@
 <% @students.each do |student| %>
   <p id="student-<%= student.id %>">Name: <%= student.name %>, Age: <%= student.age %>, House: <%= student.house %></p>
 <% end %>
+
+<h2>Average Age: <%= @students.average_age.round(1) %></h2>
