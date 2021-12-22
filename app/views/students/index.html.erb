@@ -1,0 +1,6 @@
+<h1>Students Index</h1>
+
+<h2>List of Students</h2>
+<% @students.each do |student| %>
+  <p id="student-<%= student.id %>">Name: <%= student.name %>, Age: <%= student.age %>, House: <%= student.house %></p>
+<% end %>
