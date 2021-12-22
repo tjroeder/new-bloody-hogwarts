@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe 'students index', type: :feature do
   let!(:student_1) { Student.create!(name: "name_1", age: 1, house: "house_1") }
   let!(:student_2) { Student.create!(name: "name_2", age: 2, house: "house_2") }
-  let!(:student_3) { Student.create!(name: "name_3", age: 3, house: "house_1") }
+  let!(:student_3) { Student.create!(name: "name_3", age: 4, house: "house_1") }
   
   before(:each) do
     visit students_path
   end
 
   describe 'display elements' do
-    it 'has list of students info, name, age, house' do
+    it 'shows list of students info, name, age, house' do
       within("#student-#{student_1.id}") do
         expect(page).to have_content(student_1.name) 
         expect(page).to have_content(student_1.age) 
@@ -28,6 +28,11 @@ RSpec.describe 'students index', type: :feature do
         expect(page).to have_content(student_3.age) 
         expect(page).to have_content(student_3.house) 
       end
+    end
+
+    it 'shows average student age rounded to one decimal' do
+      expect(page).to have_content("Average Age: 2.3")
+      expect(page).to have_no_content("Average Age: 2.33333")
     end
   end
 end
