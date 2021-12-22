@@ -20,7 +20,7 @@ RSpec.describe Student, type: :model do
   describe 'class methods' do
     describe '::average_age' do
       it 'should return the average student age' do
-        expected = (student_1.age + student_2.age + student_3.age).to_f / 3
+        expected = (student_1.age + student_2.age + student_3.age).to_f / Student.count
 
         expect(Student.average_age.round(1)).to eq(expected.round(1))        
       end
